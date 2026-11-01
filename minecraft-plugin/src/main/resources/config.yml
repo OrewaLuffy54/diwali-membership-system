@@ -1,0 +1,3 @@
+api-url: "https://diwali-membership-api.diwali-network.workers.dev"
+api-secret: "16422CB187C9679DF3CF3101700AC08400E49E0F6C00115C9B53F4A0D1E33699"
+sync-seconds: 60

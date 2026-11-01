@@ -1,0 +1,32 @@
+@'
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+!.env.example.*
+.dev.vars
+.wrangler/
+
+# Gradle generated files
+.gradle/
+**/.gradle/
+**/build/
+**/bin/
+
+# Build artifacts
+*.class
+*.log
+*.tsbuildinfo
+
+# Local databases and backups
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.backup
+
+.DS_Store
+Thumbs.db
+'@ | Out-File -Encoding utf8 .gitignore
+*.tsbuildinfo

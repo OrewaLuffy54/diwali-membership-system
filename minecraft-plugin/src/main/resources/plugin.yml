@@ -1,0 +1,11 @@
+name: DiwaliMembership
+version: 1.0.0
+main: network.diwali.membership.DiwaliMembership
+api-version: '1.21'
+commands:
+  dwm:
+    description: Diwali membership diagnostics
+    permission: diwali.membership.admin
+permissions:
+  diwali.membership.admin:
+    default: op

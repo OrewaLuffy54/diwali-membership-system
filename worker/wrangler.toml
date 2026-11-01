@@ -1,0 +1,17 @@
+name = "diwali-membership-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-15"
+
+[vars]
+ADMIN_DISCORD_ID = "1013832671014699130"
+ADMIN_DISCORD_IDS = "1013832671014699130,868853678868680734"
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Configure secrets with `npx wrangler secret put`:
+# SUPABASE_URL
+# SUPABASE_SERVICE_ROLE_KEY
+# PLUGIN_SECRET
+# DISCORD_BOT_TOKEN (optional; required for Discord DMs)
+# SUPABASE_ANON_KEY (optional; publishable/anon key for validating Supabase JWTs)
