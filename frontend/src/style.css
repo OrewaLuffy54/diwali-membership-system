@@ -757,7 +757,8 @@ button:disabled {
 .member-delete-btn:hover{transform:translateY(-2px);background:rgba(190,55,78,.22);box-shadow:0 0 18px rgba(255,90,120,.12)}
 .member-extend-panel{flex:1 0 100%;display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-top:8px;padding:15px;border:1px solid rgba(95,220,145,.2);border-radius:13px;background:linear-gradient(120deg,rgba(60,180,110,.08),rgba(255,255,255,.025));animation:dn-member-panel-in .22s ease-out}
 .member-extend-panel label{display:grid;gap:7px;color:#b9d7c4;font:10px 'DM Mono',monospace;letter-spacing:.08em;min-width:180px}
-.member-extend-panel input{width:100%;min-width:180px;padding:11px 12px;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:#0c1011;color:#f3fff7;color-scheme:dark}
+.member-extend-panel input,.member-extend-panel select{width:100%;min-width:180px;padding:11px 12px;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:#0c1011;color:#f3fff7;color-scheme:dark}
+.member-extend-panel select{min-width:220px;padding:11px 12px;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:#0c1011;color:#f3fff7;color-scheme:dark}
 .extend-tabs,.extend-actions{display:flex;align-items:center;gap:8px}
 .extend-tabs button{padding:9px 12px;border:1px solid rgba(255,255,255,.14);border-radius:8px;background:rgba(255,255,255,.04);color:#c8c2d0;font-size:11px}
 .extend-tabs button.active{border-color:rgba(91,225,151,.42);background:rgba(54,190,111,.14);color:#9af0bb}
