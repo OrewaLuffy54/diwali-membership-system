@@ -764,3 +764,23 @@ button:disabled {
 .extend-actions{margin-left:auto}
 @keyframes dn-member-panel-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:600px){.member-actions{width:100%}.member-extend-panel{align-items:stretch}.member-extend-panel label{width:100%}.extend-actions{margin-left:0;width:100%}}
+
+
+/* Refined Java / Bedrock selector: purple PC + green cross-platform Bedrock. */
+.edition-picker .edition-option { min-height:58px; justify-content:flex-start; gap:12px; padding:11px 16px; text-align:left; }
+.edition-option-copy { display:grid; gap:3px; }
+.edition-option-copy strong { color:inherit; font-size:12px; line-height:1.2; }
+.edition-option-copy small { color:#9695a9; font:9px 'DM Mono',monospace; letter-spacing:.07em; text-transform:uppercase; }
+.edition-picker .java-option.selected { color:#eee5ff; border-color:rgba(174,132,255,.82); background:linear-gradient(115deg,rgba(142,91,222,.27),rgba(68,76,126,.16)); box-shadow:0 0 0 2px rgba(167,139,250,.13),0 0 22px rgba(153,105,235,.13),inset 0 1px rgba(255,255,255,.08); }
+.edition-picker .java-option:hover { border-color:rgba(174,132,255,.58); }
+.bedrock-device-icons { display:inline-flex; align-items:center; gap:5px; color:#8ce4d2; }
+.edition-picker .bedrock-option.selected { color:#e3fff8; border-color:rgba(103,220,200,.78); background:linear-gradient(115deg,rgba(48,174,151,.22),rgba(41,107,119,.15)); box-shadow:0 0 0 2px rgba(103,220,200,.12),0 0 22px rgba(63,202,177,.12),inset 0 1px rgba(255,255,255,.08); }
+.edition-picker .bedrock-option:hover { border-color:rgba(103,220,200,.58); }
+@media(max-width:480px) { .edition-picker .edition-option { justify-content:flex-start; } }
+
+/* Compact Add days action and destructive Delete hover feedback. */
+.admin .pending .member-actions .member-extend-btn { min-height:38px; padding:8px 13px; border:1px solid rgba(91,225,151,.42); border-radius:10px; background:rgba(54,190,111,.10); color:#9af0bb; box-shadow:inset 0 1px rgba(255,255,255,.06); font-size:11px; font-weight:800; }
+.add-days-plus { display:inline-block; margin-right:3px; font-size:15px; line-height:0; vertical-align:-1px; }
+.admin .pending .member-actions .member-extend-btn:hover { transform:translateY(-2px); background:rgba(54,190,111,.18); border-color:rgba(91,225,151,.68); box-shadow:0 0 17px rgba(65,220,133,.18); }
+.admin .pending .member-actions .member-delete-btn { min-height:38px; padding:8px 13px; border:1px solid rgba(255,125,148,.30); border-radius:10px; background:rgba(240,90,110,.075); color:#ffb5c1; font-size:11px; font-weight:800; }
+.admin .pending .member-actions .member-delete-btn:hover { transform:translateY(-2px); background:rgba(240,70,95,.17); border-color:rgba(255,105,130,.78); box-shadow:0 0 8px rgba(255,65,95,.28),0 0 22px rgba(255,65,95,.20),inset 0 0 12px rgba(255,65,95,.08); }
