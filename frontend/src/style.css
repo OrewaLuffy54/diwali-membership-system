@@ -784,3 +784,28 @@ button:disabled {
 .admin .pending .member-actions .member-extend-btn:hover { transform:translateY(-2px); background:rgba(54,190,111,.18); border-color:rgba(91,225,151,.68); box-shadow:0 0 17px rgba(65,220,133,.18); }
 .admin .pending .member-actions .member-delete-btn { min-height:38px; padding:8px 13px; border:1px solid rgba(255,125,148,.30); border-radius:10px; background:rgba(240,90,110,.075); color:#ffb5c1; font-size:11px; font-weight:800; }
 .admin .pending .member-actions .member-delete-btn:hover { transform:translateY(-2px); background:rgba(240,70,95,.17); border-color:rgba(255,105,130,.78); box-shadow:0 0 8px rgba(255,65,95,.28),0 0 22px rgba(255,65,95,.20),inset 0 0 12px rgba(255,65,95,.08); }
+
+/* Keep member controls pinned to the far right edge of each member row. */
+.admin .pending.member-card {
+  align-items: center;
+}
+.admin .pending.member-card > .member-main {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.admin .pending.member-card > .member-actions {
+  flex: 0 0 auto;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+@media (max-width: 760px) {
+  .admin .pending.member-card > .member-main {
+    flex-basis: 100%;
+  }
+  .admin .pending.member-card > .member-actions {
+    flex: 1 1 100%;
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+}
