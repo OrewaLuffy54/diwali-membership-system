@@ -171,7 +171,6 @@ export default function App() {
               <button type="button" className="member-delete-btn" onClick={()=>deleteMember(m)}>Delete</button>
             </div>
             {panelOpen&&<div className="member-extend-panel">
-              {eligibleMemberships.length>1&&<label>Membership<select value={extendTarget||''} onChange={e=>setExtendTarget(e.target.value)}>{eligibleMemberships.map((x:any)=><option key={x.id} value={x.id}>{String(x.edition||m.edition||'java').toUpperCase()} · {x.status} · expires {new Date(x.expires_at).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})} IST</option>)}</select></label>}
               <div className="extend-tabs"><button type="button" className={extendMode==='days'?'active':''} onClick={()=>setExtendMode('days')}>Add days</button><button type="button" className={extendMode==='date'?'active':''} onClick={()=>setExtendMode('date')}>Set expiry</button></div>
               {extendMode==='days'?<label>Days to add<input type="number" min="1" max="3650" value={extendDays} onChange={e=>setExtendDays(e.target.value)}/></label>:<label>New expiry (IST)<input type="datetime-local" value={extendDateTime} onChange={e=>setExtendDateTime(e.target.value)}/></label>}
               <div className="extend-actions"><button type="button" className="member-extend-btn" onClick={()=>extendMembership(m,selectedMembership)} disabled={busy||!selectedMembership}>Save extension</button><button type="button" className="secondary" onClick={()=>setExtendTarget(null)}>Cancel</button></div>
