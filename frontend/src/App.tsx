@@ -100,20 +100,19 @@ export default function App() {
   function istDateTimeToIso(value:string){if(!value)return '';return new Date(value+':00+05:30').toISOString();}
   async function extendMembership(member:any,membership:any){
     try{
-      const currentExpiry=new Date(membership?.expires_at||Date.now());
       let expiry:Date;
       if(extendMode==='days'){
-        const base=currentExpiry.getTime()>Date.now()?currentExpiry:new Date();
         const days=Math.floor(Number(extendDays));
         if(!Number.isInteger(days)||days<1||days>3650)throw new Error('Enter days between 1 and 3650.');
-        expiry=new Date(base.getTime()+days*86400000);
+        const result=await adminRequest('/api/admin/members/'+membership.id,{method:'PATCH',body:JSON.stringify({add_days:days})});
+        expiry=new Date(result.expires_at);
       }else{
         const iso=istDateTimeToIso(extendDateTime);
         if(!iso)throw new Error('Select a new expiry date and time.');
         expiry=new Date(iso);
         if(expiry.getTime()<=Date.now())throw new Error('New expiry must be in the future.');
+        await adminRequest('/api/admin/members/'+membership.id,{method:'PATCH',body:JSON.stringify({expires_at:expiry.toISOString(),status:'active'})});
       }
-      await adminRequest('/api/admin/members/'+membership.id,{method:'PATCH',body:JSON.stringify({expires_at:expiry.toISOString(),status:'active'})});
       setMessage(`${member.minecraft_username} membership extended until ${expiry.toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})} IST.`);
       setExtendTarget(null);setExtendDateTime('');await loadMembers();
     }catch(e:any){setMessage(e.message);}
@@ -133,7 +132,7 @@ export default function App() {
     const username=accountForm.minecraft_username.trim(), discordId=accountForm.discord_id.trim();
     if(!username||!discordId){setMessage('Minecraft username and Discord ID are required.');return;}
     if(!/^[A-Za-z0-9_]{3,16}$/.test(username)){setMessage('Enter a valid Minecraft username (3–16 letters, numbers or underscores).');return;}
-    if(!/^\\d{15,22}$/.test(discordId)){setMessage('Enter a valid Discord user ID.');return;}
+    if(!/^\d{15,22}$/.test(discordId)){setMessage('Enter a valid Discord user ID.');return;}
     setBusy(true);
     try{await adminRequest('/api/admin/accounts/'+editingAccount.id,{method:'PATCH',body:JSON.stringify({minecraft_username:username,edition:accountForm.edition,discord_id:discordId})});setMessage('Member details updated successfully.');setEditingAccount(null);await loadMembers();}
     catch(e:any){setMessage(e.message);}finally{setBusy(false);}
@@ -220,10 +219,17 @@ export default function App() {
               const active=unique.filter((x:any)=>x.status==='active');
               const expired=unique.filter((x:any)=>x.status==='expired');
               const fmt=(x:any)=>new Date(x.expires_at).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'});
-              const parts=[`Total granted: ${Number(m.total_days||0).toLocaleString('en-IN')} days`];
-              if(active.length)parts.push(`Expires: ${fmt(active.sort((a:any,b:any)=>new Date(b.expires_at).getTime()-new Date(a.expires_at).getTime())[0])} IST`);
-              else if(expired.length)parts.push(`Expired: ${fmt(expired.sort((a:any,b:any)=>new Date(b.expires_at).getTime()-new Date(a.expires_at).getTime())[0])} IST`);
-              else parts.push('No membership');
+              const parts:string[]=[];
+              if(active.length){
+                const current=active.sort((a:any,b:any)=>new Date(b.expires_at).getTime()-new Date(a.expires_at).getTime())[0];
+                const remaining=Math.max(0,Math.ceil((new Date(current.expires_at).getTime()-Date.now())/86400000));
+                parts.push(`Remaining: ${remaining} ${remaining===1?'day':'days'}`);
+                parts.push(`Expires: ${fmt(current)} IST`);
+              } else if(expired.length){
+                const current=expired.sort((a:any,b:any)=>new Date(b.expires_at).getTime()-new Date(a.expires_at).getTime())[0];
+                parts.push('Remaining: 0 days');
+                parts.push(`Expired: ${fmt(current)} IST`);
+              } else { parts.push('Remaining: 0 days'); parts.push('No membership'); }
               return parts.join(' · ');
             })()}</small>
           </div>
